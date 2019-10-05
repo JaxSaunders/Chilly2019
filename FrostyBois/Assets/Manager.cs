@@ -56,7 +56,7 @@ public class Manager : MonoBehaviour {
     private IEnumerator waitForPN(int index)
     {
         print("Waiting on player: " + (index + 1) );
-        yield return StartCoroutine(listOfPlayers[index].waitForKeyPress(KeyCode.Space));
+        yield return StartCoroutine(listOfPlayers[index].waitForKeyPress(KeyCode.Mouse0));
         print("Player returned, now for next player.");
         waiting = false;
     }

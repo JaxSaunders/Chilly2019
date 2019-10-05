@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
     public float thrust;
 	public bool up;
+	public bool active;
+	public bool thrusting;
 
     [SerializeField] public float maxSpeed;
 	[SerializeField] public Rigidbody2D body;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour {
 	void Start () {	
 		body = GetComponent<Rigidbody2D>();
 		up = true;
+		thrusting = false;
     }
 	
 	// Update is called once per frame
@@ -28,18 +31,20 @@ public class Player : MonoBehaviour {
     public IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
-		
+
 		// waits until they stop moving before they can just again.
 		print("Waiting for body to be zero");
-		yield return new WaitUntil( () => body.velocity == new Vector2(0, 0) );
+		yield return new WaitUntil( waitConditions() );
         print("now ready to movez");
-
+		active = true;
         while (!done)
         {
 			// if they press the action key - start incrementing thrust.
 			if (Input.GetKey(key))
             {
-				print("Updating thrust: " + thrust + " : " + up + " -> " + (thrust + increment) + " : " + (thrust - increment));
+				print("PRessing");
+				thrusting = true;
+				//print("Updating thrust: " + thrust + " : " + up + " -> " + (thrust + increment) + " : " + (thrust - increment));
 				thrust = (up) ? (thrust + increment) : (thrust - increment);
 
 				// if we reach one end, switch up
@@ -50,15 +55,25 @@ public class Player : MonoBehaviour {
 			// if they let off the action key - we are done. thrust them in the given direction.
             if (Input.GetKeyUp(key))
             {
+                active = false;
                 done = true;
 				ThrustModel();
+				thrusting = false;
             }
+
 
 			// return nothing while we are still in the loop.
 			yield return null;
         }
 
     }
+
+	System.Func<bool> waitConditions(){
+		System.Func<bool> test = () => {
+			return body.velocity == new Vector2(0, 0);
+		};
+		return test;
+	}
 
 	public void ThrustModel(){
 		// gets the direction of where your mouse is pointing
