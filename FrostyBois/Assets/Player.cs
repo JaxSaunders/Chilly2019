@@ -15,7 +15,10 @@ public class Player : MonoBehaviour {
     [SerializeField] public float maxSpeed;
 	[SerializeField] public Rigidbody2D body;
 	[SerializeField] public float increment;
-	public bool toggle;
+
+    [SerializeField] public Arrow arrow;
+
+    public bool toggle;
 	// Use this for initialization
 	void Start () {	
 		body = GetComponent<Rigidbody2D>();
@@ -27,12 +30,17 @@ public class Player : MonoBehaviour {
 		{
 			Active = false;
 			StartCoroutine(waitForKeyPress(KeyCode.Space));
+
 		}
+		print(arrow.transform.eulerAngles.z);
 	}
 
     public IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
+		print("Waiting for body to be zero");
+		yield return new WaitUntil( () => body.velocity == new Vector2(0, 0) );
+        print("now ready to movez");
         while (!done) // essentially a "while true", but with a bool to break out naturally
         {
             thrust = (up) ? (thrust + increment) : (thrust - increment);
@@ -54,7 +62,9 @@ public class Player : MonoBehaviour {
 	public void ThrustModel(){
         thrust += 100.0f;
         print("Final thrust " + thrust);
-        body.AddForce(new Vector3(1, 1, 0) * thrust);
+		float angle = arrow.transform.eulerAngles.z;
+		Vector3 directionVector = new Vector3(-Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0 );
+        body.AddForce(directionVector * thrust);
         thrust = 0.0f;
 	}
 }
