@@ -150,12 +150,12 @@ HingeJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 848956472}
+  m_ConnectedRigidBody: {fileID: 672002400}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -2.6376963, y: 0}
+  m_ConnectedAnchor: {x: 2.6318824, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -657,12 +657,12 @@ HingeJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 87544817}
+  m_ConnectedRigidBody: {fileID: 1133166658}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -2.6318824, y: 0}
+  m_ConnectedAnchor: {x: 2.6318853, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -894,12 +894,12 @@ HingeJoint2D:
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 2088926671}
+  m_ConnectedRigidBody: {fileID: 87544817}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.7349999, y: -0.013000011}
+  m_Anchor: {x: 0.00000067803785, y: -0.00000068024747}
+  m_ConnectedAnchor: {x: 2.6376963, y: 0}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -2045,6 +2045,7 @@ MonoBehaviour:
   listOfPlayers: []
   player1: {fileID: 2088926672}
   player2: {fileID: 651788719}
+  arrow: {fileID: 2065280283}
 --- !u!4 &1987628077
 Transform:
   m_ObjectHideFlags: 0
