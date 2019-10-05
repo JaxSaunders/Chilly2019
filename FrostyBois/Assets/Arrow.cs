@@ -16,7 +16,6 @@ public class Arrow : MonoBehaviour {
 
 	void point() {
 		Vector3 mousePosition = Input.mousePosition;
-		print(mousePosition.x);
 		mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
 		Vector2 direction= new Vector2(
