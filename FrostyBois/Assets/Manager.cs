@@ -11,6 +11,7 @@ public class Manager : MonoBehaviour {
 
 	[SerializeField] public Player player1;
     [SerializeField] public Player player2;
+	[SerializeField] public Arrow arrow;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +38,19 @@ public class Manager : MonoBehaviour {
 			// increment the turn counter
 			currentTurn++;
 		}
+		if (((currentTurn % numOfPlayers) + 1) == 2)
+		{
+			arrow.transform.position = player1.transform.position;
+			//arrow.transform.position.y = player1.transform.position.y;
+			//arrow.transform.position.z = player1.transform.position.z;
+		}
+		else
+		{
+			arrow.transform.position = player2.transform.position;
+			//arrow.transform.position.y = player2.transform.position.y;
+			//arrow.transform.position.z = player2.transform.position.z;
+		}
+
 	}
 
     private IEnumerator waitForPN(int index)
