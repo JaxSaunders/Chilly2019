@@ -4,59 +4,46 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Manager : MonoBehaviour {
-
-	public float timer;
-
 	private bool waiting;
-
-	private bool p1Active;
+	public int currentTurn;
+	public int numOfPlayers;
+	public List<Player> listOfPlayers = new List<Player>();
 
 	[SerializeField] public Player player1;
     [SerializeField] public Player player2;
 
 	// Use this for initialization
 	void Start () {
-		player1.Active = true;
-		p1Active = true;
-		player2.Active = false;
 		waiting = false;
-		timer = 0;
+		currentTurn = 0;
+
+		listOfPlayers.Add(player1);
+		listOfPlayers.Add(player2);
+		numOfPlayers = 2;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		// if im currently not waiting on any character
 		if(!waiting){
+			
+			// start waiting on the next character in the list
 			waiting = true;
-			if(p1Active){
-				print("StartCoroutine(waitForP1());");
-				p1Active = false;
-                StartCoroutine(waitForP1());
-			}
-			else{
-                print("StartCoroutine(waitForP2());");
-                p1Active = true;
-                StartCoroutine(waitForP2());
-            }
+
+			// the next character is the next person in the list. once we reach the end it loops back around to the beginning.
+            print("Starting routine for player: " + ( (currentTurn % numOfPlayers) + 1 ) );
+            StartCoroutine( waitForPN(currentTurn % numOfPlayers) );
+
+			// increment the turn counter
+			currentTurn++;
 		}
 	}
 
-    private IEnumerator waitForP1()
+    private IEnumerator waitForPN(int index)
     {
-        print("Waiting on player 1");
-        yield return StartCoroutine(player1.waitForKeyPress(KeyCode.Space));
-        print("Player 1 returned, now for player 2.");
-		player2.Active = true;
-		waiting = false;
-
-    }
-
-    private IEnumerator waitForP2()
-    {
-		print("Waiting on player 2");
-        yield return StartCoroutine(player2.waitForKeyPress(KeyCode.Space));
-        print("Player 2 returned, now for player 1.");
-        player1.Active = true;
+        print("Waiting on player: " + (index + 1) );
+        yield return StartCoroutine(listOfPlayers[index].waitForKeyPress(KeyCode.Space));
+        print("Player returned, now for next player.");
         waiting = false;
-
     }
 }

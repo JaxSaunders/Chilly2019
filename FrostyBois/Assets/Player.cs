@@ -7,64 +7,71 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
     public float thrust;
 	public bool up;
-	public bool Active;
 
-	public int counter;
-
-    [SerializeField] public int playerID;
     [SerializeField] public float maxSpeed;
 	[SerializeField] public Rigidbody2D body;
 	[SerializeField] public float increment;
 
     [SerializeField] public Arrow arrow;
 
-    public bool toggle;
 	// Use this for initialization
 	void Start () {	
 		body = GetComponent<Rigidbody2D>();
+		up = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if (Active)
-		{
-			Active = false;
-			StartCoroutine(waitForKeyPress(KeyCode.Space));
 
-		}
-		print(arrow.transform.eulerAngles.z);
 	}
 
     public IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
+		
+		// waits until they stop moving before they can just again.
 		print("Waiting for body to be zero");
 		yield return new WaitUntil( () => body.velocity == new Vector2(0, 0) );
         print("now ready to movez");
-        while (!done) // essentially a "while true", but with a bool to break out naturally
+
+        while (!done)
         {
-            thrust = (up) ? (thrust + increment) : (thrust - increment);
+			// if they press the action key - start incrementing thrust.
+			if (Input.GetKey(key))
+            {
+				print("Updating thrust: " + thrust + " : " + up + " -> " + (thrust + increment) + " : " + (thrust - increment));
+				thrust = (up) ? (thrust + increment) : (thrust - increment);
 
-			// if we reach one end, switch up
-			if(thrust >= maxSpeed){ up = false;}
-			if(thrust <= 0.0f){up = true;}
+				// if we reach one end, switch up
+				if(thrust >= maxSpeed){ up = false;}
+				if(thrust <= 0.0f){ up = true; }
+			}
 
+			// if they let off the action key - we are done. thrust them in the given direction.
             if (Input.GetKeyUp(key))
             {
-                done = true; // breaks the loop
+                done = true;
 				ThrustModel();
             }
-            yield return null; // wait until next frame, then continue execution from here (loop continues)
+
+			// return nothing while we are still in the loop.
+			yield return null;
         }
 
     }
 
 	public void ThrustModel(){
-        thrust += 100.0f;
-        print("Final thrust " + thrust);
+		// gets the direction of where your mouse is pointing
 		float angle = arrow.transform.eulerAngles.z;
-		Vector3 directionVector = new Vector3(-Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0 );
+		Vector3 directionVector = new Vector3(-Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad), 0.00f );
+		print("Angle is: " + angle);
+	
+		// adds thrust for the jump.
+		thrust += 100.0f;
+        print("Final thrust " + thrust);
         body.AddForce(directionVector * thrust);
+
+		// resets thrust.
         thrust = 0.0f;
 	}
 }

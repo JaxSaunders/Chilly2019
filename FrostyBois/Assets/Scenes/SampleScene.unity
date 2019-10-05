@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 534669903}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,7 +226,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -288,14 +288,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 0
   up: 0
-  Active: 0
-  counter: 0
-  playerID: 0
   maxSpeed: 400
   body: {fileID: 0}
-  increment: 1
+  increment: 10
   arrow: {fileID: 2065280283}
-  toggle: 0
 --- !u!50 &651788720
 Rigidbody2D:
   serializedVersion: 4
@@ -897,7 +893,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81293cc936f677c4aaecb4d775cfc7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
+  currentTurn: 0
+  numOfPlayers: 0
+  listOfPlayers: []
   player1: {fileID: 2088926672}
   player2: {fileID: 651788719}
 --- !u!4 &1987628077
@@ -979,7 +977,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300000, guid: b6b91f46000f4244a8549caf1118203f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 3, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -993,13 +991,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2065280282}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -2.52, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &2088926667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,11 +1137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 0
   up: 0
-  Active: 0
-  counter: 0
-  playerID: 0
   maxSpeed: 400
   body: {fileID: 0}
-  increment: 1
+  increment: 10
   arrow: {fileID: 2065280283}
-  toggle: 0

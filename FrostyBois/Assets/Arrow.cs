@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour {
 
-    // Use this for initialization
-    void Start () {
-
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
 	// Update is called once per frame
@@ -16,12 +16,11 @@ public class Arrow : MonoBehaviour {
 
 	void point() {
 		Vector3 mousePosition = Input.mousePosition;
-		mousePosition.z = 1.0f;
-		print("test: " + mousePosition);
 		mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
 		Vector2 direction= new Vector2(
-            mousePosition.x - transform.position.x,
-            mousePosition.y - transform.position.y
+			mousePosition.x - transform.position.x,
+			mousePosition.y - transform.position.y
 		);
 
 		transform.up = direction;
