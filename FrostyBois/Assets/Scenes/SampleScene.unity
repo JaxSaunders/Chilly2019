@@ -328,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 0
   up: 0
+  active: 0
   maxSpeed: 400
   body: {fileID: 0}
   increment: 10
@@ -1010,6 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34eb99de13ff4ff41a8fcfaead063136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpriteRenderer: {fileID: 0}
+  player1: {fileID: 2088926672}
+  player2: {fileID: 651788719}
 --- !u!212 &2065280284
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1220,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 0
   up: 0
+  active: 0
   maxSpeed: 400
   body: {fileID: 0}
   increment: 10

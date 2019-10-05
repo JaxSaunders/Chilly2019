@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour {
 
+	public SpriteRenderer m_SpriteRenderer;
+	[SerializeField] public Player player1;
+	[SerializeField] public Player player2;
 	// Use this for initialization
 	void Start () {
-		
+		m_SpriteRenderer = GetComponent<SpriteRenderer>();
+		m_SpriteRenderer.color = Color.yellow;
 	}
 	
 	// Update is called once per frame
@@ -14,7 +18,8 @@ public class Arrow : MonoBehaviour {
 		point();
      }
 
-	void point() {
+	void point() 
+	{
 		Vector3 mousePosition = Input.mousePosition;
 		mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 

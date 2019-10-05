@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
     public float thrust;
 	public bool up;
-
+	public bool active;
     [SerializeField] public float maxSpeed;
 	[SerializeField] public Rigidbody2D body;
 	[SerializeField] public float increment;
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	void Start () {	
 		body = GetComponent<Rigidbody2D>();
 		up = true;
+		active = false;
     }
 	
 	// Update is called once per frame
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour {
     public IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
-		
+		active = true;
 		// waits until they stop moving before they can just again.
 		print("Waiting for body to be zero");
 		yield return new WaitUntil( () => body.velocity == new Vector2(0, 0) );
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour {
             {
                 done = true;
 				ThrustModel();
+				active = false;
             }
 
 			// return nothing while we are still in the loop.
