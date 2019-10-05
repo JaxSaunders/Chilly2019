@@ -19,31 +19,34 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.Space))
-        {
-			if (up)
-			{
-				thrust+= increment;
-				if (thrust >= maxSpeed)
-				{
-					up = false;
-				}
-			}
-			else
-			{
-				thrust-= increment;
-				if (thrust <= 0.0f)
-				{
-					up = true;
-				}
-			}		
-        }
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (body.velocity == new Vector2(0,0))
 		{
-			thrust += 100.0f;
-			print("Final thrust " + thrust);
-			body.AddForce(new Vector3(1, 1, 0) * thrust);
-			thrust = 0.0f;
+			if (Input.GetKey(KeyCode.Space))
+			{
+				if (up)
+				{
+					thrust+= increment;
+					if (thrust >= maxSpeed)
+					{
+						up = false;
+					}
+				}
+				else
+				{
+					thrust-= increment;
+					if (thrust <= 0.0f)
+					{
+						up = true;
+					}
+				}		
+			}
+			if (Input.GetKeyUp(KeyCode.Space))
+			{
+				thrust += 100.0f;
+				print("Final thrust " + thrust);
+				body.AddForce(new Vector3(1, 1, 0) * thrust);
+				thrust = 0.0f;
+			}
 		}
 	}
 }
