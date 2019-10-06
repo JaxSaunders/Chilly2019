@@ -63,10 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Arrow.cs" />
+    <Compile Include="Assets\EscapeWatch.cs" />
     <Compile Include="Assets\FollowPlayers.cs" />
+    <Compile Include="Assets\LevelTransitionToEnd.cs" />
+    <Compile Include="Assets\LevelTransitionToThree.cs" />
+    <Compile Include="Assets\LevelTransitionToTwo.cs" />
     <Compile Include="Assets\Manager.cs" />
     <Compile Include="Assets\Player.cs" />
-    <Compile Include="Assets\testManager.cs" />
+    <Compile Include="Assets\QuitButton.cs" />
+    <Compile Include="Assets\SoundManager.cs" />
+    <Compile Include="Assets\StartButton.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Micha/OneDrive/Desktop/UNT/Chillennium2019/Chilly2019/FrostyBois/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

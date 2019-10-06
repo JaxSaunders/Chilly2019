@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
 	private bool waiting;
@@ -16,7 +17,7 @@ public class Manager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		waiting = false;
-		currentTurn = 0;
+		currentTurn = 1;
 
 		listOfPlayers.Add(player1);
 		listOfPlayers.Add(player2);
@@ -49,6 +50,10 @@ public class Manager : MonoBehaviour {
 			arrow.transform.position = player2.transform.position;
 			//arrow.transform.position.y = player2.transform.position.y;
 			//arrow.transform.position.z = player2.transform.position.z;
+		}
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
 		}
 
 	}

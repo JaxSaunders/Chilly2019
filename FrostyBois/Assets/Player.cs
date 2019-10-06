@@ -13,8 +13,8 @@ public class Player : MonoBehaviour {
     [SerializeField] public float maxSpeed;
 	[SerializeField] public Rigidbody2D body;
 	[SerializeField] public float increment;
-
     [SerializeField] public Arrow arrow;
+
 
 	// Use this for initialization
 	void Start () {	
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 
 		// waits until they stop moving before they can just again.
 		print("Waiting for body to be zero");
-		yield return new WaitUntil( waitConditions() );
+		yield return new WaitUntil( () => body.velocity == new Vector2(0, 0) );
         print("now ready to movez");
 		active = true;
         while (!done)
@@ -67,13 +67,6 @@ public class Player : MonoBehaviour {
         }
 
     }
-
-	System.Func<bool> waitConditions(){
-		System.Func<bool> test = () => {
-			return body.velocity == new Vector2(0, 0);
-		};
-		return test;
-	}
 
 	public void ThrustModel(){
 		// gets the direction of where your mouse is pointing
